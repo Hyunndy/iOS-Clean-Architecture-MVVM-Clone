@@ -9,13 +9,11 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    /// DIContainer
-//    let appDIContainer = appDIContainer()
-    /// FlowCoordinator
-//    let appFlowCoordinator: AppFlowCoordinators?
+    // DIContainer
+    let appDIContainer = AppDIContainer()
+    var appFlowCoordinator: AppFlowCoordinator?
     
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -31,12 +29,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController()
         self.window?.rootViewController = navigationController
-//        appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
-//        appFlowCoordinators?.start()
-        
+        self.appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: AppDIContainer())
+        self.appFlowCoordinator?.start()
         self.window?.makeKeyAndVisible()
-        
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

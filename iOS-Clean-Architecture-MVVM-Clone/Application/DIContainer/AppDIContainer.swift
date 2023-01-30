@@ -11,8 +11,6 @@ import Foundation
  App Dependency Injection Class
  
  SceneDelegate에서 주입한다.
- 
- 
  */
 final class AppDIContainer {
     
@@ -28,4 +26,11 @@ final class AppDIContainer {
         let apiDataNetwork = DefaultNetworkService(config: config)
         return DefaultDataTransferService(with: apiDataNetwork)
     }()
+    
+    // MARK: DIContainers of scenes
+    func makeMovieSceneDIContainer() -> MovieSceneDIContainer {
+        let dependencies = MovieSceneDIContainer.Dependencies(apiDataTransferService: self.apiDataTransferService)
+        
+        return MovieSceneDIContainer(dependencies: dependencies)
+    }
 }

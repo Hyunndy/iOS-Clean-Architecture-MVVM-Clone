@@ -22,6 +22,9 @@
 		020888A92987D58F004CE340 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888A82987D58F004CE340 /* NetworkService.swift */; };
 		020888AC2987DEBC004CE340 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888AB2987DEBC004CE340 /* Endpoint.swift */; };
 		020888AE2987E07C004CE340 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888AD2987E07C004CE340 /* NetworkConfig.swift */; };
+		020888B029880D2A004CE340 /* MovieSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888AF29880D2A004CE340 /* MovieSceneDIContainer.swift */; };
+		020888B2298814D9004CE340 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888B1298814D9004CE340 /* AppFlowCoordinator.swift */; };
+		020888B529881A49004CE340 /* MovieSearchFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888B429881A49004CE340 /* MovieSearchFlowCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		020888A82987D58F004CE340 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		020888AB2987DEBC004CE340 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		020888AD2987E07C004CE340 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		020888AF29880D2A004CE340 /* MovieSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSceneDIContainer.swift; sourceTree = "<group>"; };
+		020888B1298814D9004CE340 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		020888B429881A49004CE340 /* MovieSearchFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchFlowCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 				020888682987CE5C004CE340 /* SceneDelegate.swift */,
 				020888662987CE5C004CE340 /* AppDelegate.swift */,
 				020888A42987D259004CE340 /* AppConfiguration.swift */,
+				020888B1298814D9004CE340 /* AppFlowCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -164,6 +171,7 @@
 		0208889C2987CF59004CE340 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				020888B329881A3A004CE340 /* Flows */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -205,8 +213,17 @@
 			isa = PBXGroup;
 			children = (
 				020888A22987D1B3004CE340 /* AppDIContainer.swift */,
+				020888AF29880D2A004CE340 /* MovieSceneDIContainer.swift */,
 			);
 			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		020888B329881A3A004CE340 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				020888B429881A49004CE340 /* MovieSearchFlowCoordinator.swift */,
+			);
+			path = Flows;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -342,12 +359,15 @@
 			files = (
 				020888A72987D552004CE340 /* DataTransferService.swift in Sources */,
 				020888A32987D1B3004CE340 /* AppDIContainer.swift in Sources */,
+				020888B029880D2A004CE340 /* MovieSceneDIContainer.swift in Sources */,
 				020888AC2987DEBC004CE340 /* Endpoint.swift in Sources */,
 				020888A52987D259004CE340 /* AppConfiguration.swift in Sources */,
 				0208886B2987CE5C004CE340 /* ViewController.swift in Sources */,
 				020888672987CE5C004CE340 /* AppDelegate.swift in Sources */,
 				020888692987CE5C004CE340 /* SceneDelegate.swift in Sources */,
 				020888A92987D58F004CE340 /* NetworkService.swift in Sources */,
+				020888B2298814D9004CE340 /* AppFlowCoordinator.swift in Sources */,
+				020888B529881A49004CE340 /* MovieSearchFlowCoordinator.swift in Sources */,
 				020888AE2987E07C004CE340 /* NetworkConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
