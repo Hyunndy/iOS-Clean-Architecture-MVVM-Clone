@@ -16,6 +16,12 @@
 		0208887E2987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0208887D2987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneTests.swift */; };
 		020888882987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888872987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITests.swift */; };
 		0208888A2987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888892987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITestsLaunchTests.swift */; };
+		020888A32987D1B3004CE340 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888A22987D1B3004CE340 /* AppDIContainer.swift */; };
+		020888A52987D259004CE340 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888A42987D259004CE340 /* AppConfiguration.swift */; };
+		020888A72987D552004CE340 /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888A62987D552004CE340 /* DataTransferService.swift */; };
+		020888A92987D58F004CE340 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888A82987D58F004CE340 /* NetworkService.swift */; };
+		020888AC2987DEBC004CE340 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888AB2987DEBC004CE340 /* Endpoint.swift */; };
+		020888AE2987E07C004CE340 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020888AD2987E07C004CE340 /* NetworkConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		020888832987CE5D004CE340 /* iOS-Clean-Architecture-MVVM-CloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-Clean-Architecture-MVVM-CloneUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020888872987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Clean_Architecture_MVVM_CloneUITests.swift; sourceTree = "<group>"; };
 		020888892987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Clean_Architecture_MVVM_CloneUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		020888A22987D1B3004CE340 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		020888A42987D259004CE340 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		020888A62987D552004CE340 /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		020888A82987D58F004CE340 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		020888AB2987DEBC004CE340 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		020888AD2987E07C004CE340 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +111,17 @@
 		020888652987CE5C004CE340 /* iOS-Clean-Architecture-MVVM-Clone */ = {
 			isa = PBXGroup;
 			children = (
-				020888662987CE5C004CE340 /* AppDelegate.swift */,
-				020888682987CE5C004CE340 /* SceneDelegate.swift */,
-				0208886A2987CE5C004CE340 /* ViewController.swift */,
-				0208886C2987CE5C004CE340 /* Main.storyboard */,
-				0208886F2987CE5D004CE340 /* Assets.xcassets */,
-				020888712987CE5D004CE340 /* LaunchScreen.storyboard */,
+				0208889A2987CF51004CE340 /* Application */,
+				0208889F2987CF7F004CE340 /* Common */,
+				0208889D2987CF72004CE340 /* Data */,
+				0208889B2987CF56004CE340 /* Domain */,
 				020888742987CE5D004CE340 /* Info.plist */,
+				0208889E2987CF78004CE340 /* Infrastructure */,
+				020888712987CE5D004CE340 /* LaunchScreen.storyboard */,
+				0208886C2987CE5C004CE340 /* Main.storyboard */,
+				0208889C2987CF59004CE340 /* Presentation */,
+				020888A02987CF86004CE340 /* Resources */,
+				0208886A2987CE5C004CE340 /* ViewController.swift */,
 			);
 			path = "iOS-Clean-Architecture-MVVM-Clone";
 			sourceTree = "<group>";
@@ -125,6 +141,72 @@
 				020888892987CE5D004CE340 /* iOS_Clean_Architecture_MVVM_CloneUITestsLaunchTests.swift */,
 			);
 			path = "iOS-Clean-Architecture-MVVM-CloneUITests";
+			sourceTree = "<group>";
+		};
+		0208889A2987CF51004CE340 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				020888A12987D150004CE340 /* DIContainer */,
+				020888682987CE5C004CE340 /* SceneDelegate.swift */,
+				020888662987CE5C004CE340 /* AppDelegate.swift */,
+				020888A42987D259004CE340 /* AppConfiguration.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		0208889B2987CF56004CE340 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0208889C2987CF59004CE340 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0208889D2987CF72004CE340 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0208889E2987CF78004CE340 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				020888A62987D552004CE340 /* DataTransferService.swift */,
+				020888A82987D58F004CE340 /* NetworkService.swift */,
+				020888AB2987DEBC004CE340 /* Endpoint.swift */,
+				020888AD2987E07C004CE340 /* NetworkConfig.swift */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		0208889F2987CF7F004CE340 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		020888A02987CF86004CE340 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0208886F2987CE5D004CE340 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		020888A12987D150004CE340 /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				020888A22987D1B3004CE340 /* AppDIContainer.swift */,
+			);
+			path = DIContainer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +340,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				020888A72987D552004CE340 /* DataTransferService.swift in Sources */,
+				020888A32987D1B3004CE340 /* AppDIContainer.swift in Sources */,
+				020888AC2987DEBC004CE340 /* Endpoint.swift in Sources */,
+				020888A52987D259004CE340 /* AppConfiguration.swift in Sources */,
 				0208886B2987CE5C004CE340 /* ViewController.swift in Sources */,
 				020888672987CE5C004CE340 /* AppDelegate.swift in Sources */,
 				020888692987CE5C004CE340 /* SceneDelegate.swift in Sources */,
+				020888A92987D58F004CE340 /* NetworkService.swift in Sources */,
+				020888AE2987E07C004CE340 /* NetworkConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
