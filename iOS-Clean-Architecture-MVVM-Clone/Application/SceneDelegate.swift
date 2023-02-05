@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         /// AppAppearance
-//        AppAppearance.setupAppearance()
+        AppAppearance.setupAppearance()
         
         self.window = UIWindow(windowScene: windowScene)
         

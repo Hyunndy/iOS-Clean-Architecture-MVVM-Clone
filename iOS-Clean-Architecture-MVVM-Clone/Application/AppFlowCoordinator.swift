@@ -9,12 +9,19 @@ import Foundation
 import UIKit
 
 /*
- 이 저자가 Coordinator 패턴을 만들어서 App, MovieScene Coordinator가 있다.
+ one-high-level Coordinator
+ 최상위 Coordinator
+ 
+ Coordinator란? ViewController에서 Flow 로직을 따로 분리한 객체
+ 
+ 모든 Coordinator는 하위 Coordinator가 있으며,
+ 각 Coordinator는 부모에 의해서만 생성된다.
  */
-
 final class AppFlowCoordinator {
     
     var navigationController: UINavigationController
+    
+    /// 앱 전반에서 사용하는 DI Container
     private let appDIContainer: AppDIContainer
     
     init(navigationController: UINavigationController, appDIContainer: AppDIContainer) {
@@ -22,14 +29,14 @@ final class AppFlowCoordinator {
         self.appDIContainer = appDIContainer
     }
     
-    /*
-     이 start() 함수가 DI 세팅하면서 같이 불리는데 이것의 의미가 무엇인지..
-     */
+    /// 메인화면인 MovieScene으로 가는 Coordinator를 Spawn한다.
     func start() {
-        // In App Flow we can check if user needs to login, if yes we would run login flow
-        let movieSceneDIContainer = appDIContainer.makeMovieSceneDIContainer()
         
+        let movieSceneDIContainer = appDIContainer.makeMovieSceneDIContainer()
 
+        // MovieSceneFlowCoordinator를 리턴하는 함수가 DIContainer에 존재한다.
+        let flow = movieSceneDIContainer.makeMovieSearchFlowCoordinator(navigationController: navigationController)
+        
+        flow.start()
     }
-    
 }

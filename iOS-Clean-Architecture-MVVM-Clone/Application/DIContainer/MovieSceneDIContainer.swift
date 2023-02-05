@@ -42,16 +42,85 @@ final class MovieSceneDIContainer {
     
     
     // MARK: Flow Coordinators
-    
-    /*
-     왜 dependency self일까옹?
-     */
     func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MovieSearchFlowCoordinator {
         return MovieSearchFlowCoordinator(navigationController: navigationController, dependencies: self)
     }
 }
 
 /*
- 실제 구현을 하지도 않으면서?
+ Flow Coordinator에서 Flow 로직을 실행했을 때 이동할 VC 생성을 DI Container에서 한다.
+ 완전 분리하는군
  */
-extension MovieSceneDIContainer: MovieSearchFlowCoordinatorDependencies {}
+extension MovieSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
+    // MARK: - Movies List
+    /*
+     ViewController와 ViewModel을 모두 여기서 생성해서 만들어준다.
+     그리고 ViewModel이 프로토콜이다.
+     
+     */
+    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
+        return MoviesListViewController.create(with: makeMoviesListViewModel(actions: actions),
+                                               posterImagesRepository: makePosterImagesRepository())
+    }
+    
+    func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
+        return DefaultMoviesListViewModel(searchMoviesUseCase: makeSearchMoviesUseCase(),
+                                          actions: actions)
+    }
+    
+    // MARK: - Movie Details
+    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
+        return MovieDetailsViewController.create(with: makeMoviesDetailsViewModel(movie: movie))
+    }
+    
+    func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
+        return DefaultMovieDetailsViewModel(movie: movie,
+                                            posterImagesRepository: makePosterImagesRepository())
+    }
+    
+    // MARK: - Movies Queries Suggestions List
+    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
+        if #available(iOS 13.0, *) { // SwiftUI
+            let view = MoviesQueryListView(viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect))
+            return UIHostingController(rootView: view)
+        } else { // UIKit
+            return MoviesQueriesTableViewController.create(with: makeMoviesQueryListViewModel(didSelect: didSelect))
+        }
+    }
+    
+    func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
+        return DefaultMoviesQueryListViewModel(numberOfQueriesToShow: 10,
+                                               fetchRecentMovieQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
+                                               didSelect: didSelect)
+    }
+
+    @available(iOS 13.0, *)
+    func makeMoviesQueryListViewModelWrapper(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModelWrapper {
+        return MoviesQueryListViewModelWrapper(viewModel: makeMoviesQueryListViewModel(didSelect: didSelect))
+    }
+}
+
+//----
+protocol Serializer {
+    func serialize(data: Any) -> Data?
+}
+
+class ImageRequestSerializer: Serializer {
+    func serialize(data: Any) -> Data? {
+        return nil
+    }
+}
+
+class DataRequestSerializer: Serializer {
+    func serialize(data: Any) -> Data? {
+        return nil
+    }
+}
+
+
+class DataManager {
+    
+    func serialRequest(_ request: URLRequest, with serializer: Serializer) -> Data? {
+        return nil
+    }
+}
