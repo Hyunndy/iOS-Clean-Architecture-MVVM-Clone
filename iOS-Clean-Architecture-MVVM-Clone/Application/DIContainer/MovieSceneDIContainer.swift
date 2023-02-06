@@ -38,8 +38,27 @@ final class MovieSceneDIContainer {
      여기서는 최근검색어를 위한 CoreData를 사용한다.
      */
     
-    // MARK: Persistent Storage
+    // MARK: - Persistent Storage
+    lazy var moviesQueriesStorage: MoviesQueriesStorage = CoreDataMoviesQueriesStorage(maxStorageLimit: 10)
+    lazy var moviesResponseCache: MoviesResponseStorage = CoreDataMoviesResponseStorage()
     
+    
+    // MARK: - Repositories
+    func makeMoviesRepository() -> MoviesRepository {
+        return DefaultMoviesRepository(dataTransferService: dependencies.apiDataTransferService, cache: moviesResponseCache)
+    }
+    func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
+        return DefaultMoviesQueriesRepository(dataTransferService: dependencies.apiDataTransferService,
+                                              moviesQueriesPersistentStorage: moviesQueriesStorage)
+    }
+    func makePosterImagesRepository() -> PosterImagesRepository {
+        return DefaultPosterImagesRepository(dataTransferService: dependencies.imageDataTransferService)
+    }
+    
+    // MARK: Use Cases
+    func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
+        return DefaultSearchMoviesUseCase(moviesRepository: makeMoviesRepository(), moviesQueriesRepository: makeMoviesQueriesRepository())
+    }
     
     // MARK: Flow Coordinators
     func makeMovieSearchFlowCoordinator(navigationController: UINavigationController) -> MovieSearchFlowCoordinator {
@@ -56,13 +75,16 @@ extension MovieSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
     /*
      ViewController와 ViewModel을 모두 여기서 생성해서 만들어준다.
      그리고 ViewModel이 프로토콜이다.
-     
      */
     func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
+        
+        /// 뷰모델에 VC -> ViewModel -> Flow로 가는 액션 + ImageRepository를 주입한다.
         return MoviesListViewController.create(with: makeMoviesListViewModel(actions: actions),
                                                posterImagesRepository: makePosterImagesRepository())
     }
     
+    
+    /// 뷰 모델에 UseCase, actions을 넣는다.
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         return DefaultMoviesListViewModel(searchMoviesUseCase: makeSearchMoviesUseCase(),
                                           actions: actions)

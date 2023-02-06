@@ -7,6 +7,9 @@
 
 import Foundation
 
+/*
+ 실행..?
+ */
 protocol SearchMoviesUseCase {
     func execute(requestValue: SearchMoviesUseCaseRequestValue,
                  cached: @escaping (MoviesPage) -> Void,
